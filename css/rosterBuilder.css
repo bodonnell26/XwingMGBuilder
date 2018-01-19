@@ -1,0 +1,13 @@
+.shipTab {
+  border-left: red 1px solid;
+  border-top: red 1px solid;
+  border-radius: 10px 0 0 0;
+  padding: 5px;
+  margin-bottom: 5px;
+}
+
+.remove {
+  height:15px;
+  width: 15px;
+  float: right;
+}
