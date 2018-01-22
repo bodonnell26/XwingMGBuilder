@@ -9,20 +9,24 @@
 	<body>
             <div>
                 Build a roster
-            </div>
-            <div data-bind="foreach: shipRoster">
-              <div class="shipTab">
-                Name:
-                <select data-bind="options: $root.availableShips, value: $data.shipName"></select>
-
-                Pilot:
-                <select data-bind="options: $root.availablePilots, optionsText: 'pilot', value: $data.pilotInfo, disable: $data.shipName() == ''"></select>
-                <img class="remove" data-bind="click: $root.removeShip" src="https://openclipart.org/image/2400px/svg_to_png/16155/milker-X-icon.png" />
               </div>
-            </div>
-            <button data-bind="click: addNewShip">Add New Ship</button>
-            <div>
-              Total: <span data-bind="text: totalPoints"></span>
-            </div>
+              <div data-bind="foreach: shipRoster">
+                <div class="shipTab">
+                  Name:
+                  <select data-bind="options: $root.inventory, optionsText: function(item){return item.ship().shipName();}, optionsValue: 'ship',value: $data.selectedShip"></select>
+
+                  Pilot:
+                  <select data-bind="options: $root.getPilots($data.selectedShip),
+                    optionsText: function(item){return ko.unwrap(item.pilotName) + '['+ ko.unwrap(item.skill) + ']('+ko.unwrap(item.value)+')'},         
+                    value: $data.selectedPilot, 
+                    disable: $data.selectedShip() == '', 
+                    event:{change: $root.updateTotal}"></select>
+                  <img class="remove" data-bind="click: $root.removeShip" src="https://openclipart.org/image/2400px/svg_to_png/16155/milker-X-icon.png" />
+                </div>
+              </div>
+              <button data-bind="click: addNewShip">Add New Ship</button>
+              <div>
+                Total: <span data-bind="text: totalPoints"></span>
+              </div>
 	</body>
 </html>
