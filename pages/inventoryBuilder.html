@@ -1,0 +1,94 @@
+<!doctype html>
+<html>
+	<head>
+            <script src="../js/jquery-3.2.1.min.js" type="text/javascript"></script>
+            <script src="http://ajax.aspnetcdn.com/ajax/knockout/knockout-3.3.0.js"></script>
+            <script src="https://one-com.github.io/knockout-popupTemplate/knockout.popupTemplate.js"></script>
+            <script src="../models/inventoryBuilder.js" type="text/javascript"></script>
+            <link rel="stylesheet" href="../css/inventoryBuilder.css">
+	</head>
+	<body>
+            <div id="container">
+            <div class="catalog" data-bind="with: fullCatalog">
+                <h2>
+                Ships
+                </h2>
+                <div data-bind="foreach: ships">
+                  <input type="checkbox" data-bind="checkedValue: $data, checked: $root.myInventory().ships"/><span data-bind="text: shipName"></span><br/>
+                </div>
+                <h2>
+                Pilots
+                </h2>
+                <div data-bind="foreach: pilots">
+                  <script type="text/html" data-bind="attr:{id : 'pilot_'+pilotID()}">
+                                            <div class="popup">
+                    <h3 data-bind="text: pilotName"></h3>
+                    <span data-bind="text: 'Skill: '+skill()"></span><br/>
+                    <span data-bind="text: 'Cost: '+cost()"></span><br/>
+                    </div>
+                                    </script>
+                  <input type="checkbox" data-bind="checkedValue: $data, checked: $root.myInventory().pilots"/><span data-bind="text: pilotName"></span><img class="infoIcon" src="https://image.flaticon.com/icons/svg/61/61093.svg" data-bind="popupTemplate:{template: 'pilot_'+pilotID(),
+                  positioning: { horizontal: 'outside-right', vertical: 'middle' }}"/><br/>
+
+                </div>
+                <h2>
+                Upgrades
+                </h2>
+                <div data-bind="foreach: upgrades">
+                  <script type="text/html" data-bind="attr:{id : 'upgrade_'+upgradeID()}">
+                                            <div class="popup">
+                    <h3 data-bind="text: upgradeName"></h3>
+                    <span data-bind="text: 'Type: '+upgradeType()"></span><br/>
+                    </div>
+                                    </script>
+                  <input type="checkbox" data-bind="checkedValue: $data, checked: $root.myInventory().upgrades"/><span data-bind="text: upgradeName"></span><img class="infoIcon" src="https://image.flaticon.com/icons/svg/61/61093.svg" data-bind="popupTemplate:{template: 'upgrade_'+upgradeID(),
+                  positioning: { horizontal: 'outside-right', vertical: 'middle' }}"/><br/>
+                </div>
+            </div>
+            <div class="inventory" data-bind="with: $root.myInventory">
+              <div data-bind="visible: ships().length > 0 ">
+               <h2>
+                Ships
+                </h2>
+                <table data-bind="foreach: ships">
+                <tr>
+                  <td data-bind="text: shipName"></td>
+                  <td><input class="invQty" data-bind="value: shipQty"/></td>
+                </tr>
+                </table>
+              </div>
+              <div data-bind="visible: pilots().length > 0 ">
+               <h2>
+                Pilots
+                </h2>
+                <table data-bind="foreach: pilots">
+                <tr>
+                  <td data-bind="text: pilotName"></td>
+                  <td><input class="invQty" data-bind="value: pilotQty"/></td>
+                  <td><img class="infoIcon" src="https://image.flaticon.com/icons/svg/61/61093.svg" data-bind="popupTemplate:{template: 'pilot_'+pilotID(),
+                  positioning: { horizontal: 'outside-right', vertical: 'middle' }}"/></td>
+                </tr>
+                </table>
+              </div>
+              <div data-bind="visible: upgrades().length > 0 ">
+               <h2>
+                Upgrades
+                </h2>
+                <table data-bind="foreach: upgrades">
+                <tr>
+                  <td data-bind="text: upgradeName"></td>
+                  <td><input class="invQty" data-bind="value: upgradeQty"/></td>
+                  <td><img class="infoIcon" src="https://image.flaticon.com/icons/svg/61/61093.svg" data-bind="popupTemplate:{template: 'upgrade_'+upgradeID(),
+                  positioning: { horizontal: 'outside-right', vertical: 'middle' }}"/></td>
+                </tr>
+                </table>
+              </div>
+            </div>
+            </div>
+            <br/>
+            <button data-bind="click: magic">
+            magic
+            </button>
+
+	</body>
+</html>

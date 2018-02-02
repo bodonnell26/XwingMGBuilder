@@ -1,0 +1,42 @@
+.catalog{
+  width: 200px;
+  display: inline-block;
+  background-color: gray;
+  height:300px;
+  margin-right: 5px;
+  float: left;
+  overflow: scroll;
+}
+.infoIcon{
+  height:15px;
+  width:15px;
+  padding-left:15px;
+}
+.infoIcon:hover{
+  cursor: pointer;
+}
+.inventory{
+  min-width: 300px;
+  border: 1px black solid;
+  display: inline-block;
+  height:300px;
+  overflow: scroll;
+}
+
+#container{
+  height: 325px;
+  padding: 5px;
+}
+
+.popup {
+    border: thin #aaa solid;
+    -webkit-box-shadow: 1px 1px 4px rgba(50, 50, 50, 0.75);
+    -moz-box-shadow:    1px 1px 4px rgba(50, 50, 50, 0.75);
+    box-shadow:         1px 1px 4px rgba(50, 50, 50, 0.75);
+    padding: 0.3em 1em;
+    background-color: white;
+}
+.invQty{
+  width: 20px;
+  margin-left: 5px;
+}
