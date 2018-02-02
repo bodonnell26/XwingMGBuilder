@@ -16,3 +16,6 @@
 .shipTab select{
   width: 200px;
 }
+.overLimit{
+  color: red;
+}

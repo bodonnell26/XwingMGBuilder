@@ -7,26 +7,27 @@
             <link rel="stylesheet" href="css/rosterBuilder.css">
 	</head>
 	<body>
-            <div>
-                Build a roster
-              </div>
-              <div data-bind="foreach: shipRoster">
-                <div class="shipTab">
-                  Name:
-                  <select data-bind="options: $root.inventory, optionsText: function(item){return item.ship().shipName();}, optionsValue: 'ship',value: $data.selectedShip"></select>
+            <span>Enter roster cost limit:</span><input data-bind="value: costLimit"/><br/>
+            <span>
+              Build a roster
+            </span>
+            <div data-bind="foreach: shipRoster">
+              <div class="shipTab">
+                Name:
+                <select data-bind="options: $root.inventory, optionsText: function(item){return item.ship().shipName();},optionsCaption: 'Select a Ship', optionsValue: 'ship',value: $data.selectedShip"></select>
 
-                  Pilot:
-                  <select data-bind="options: $root.getPilots($data.selectedShip),
-                    optionsText: function(item){return ko.unwrap(item.pilotName) + '['+ ko.unwrap(item.skill) + ']('+ko.unwrap(item.value)+')'},         
-                    value: $data.selectedPilot, 
-                    disable: $data.selectedShip() == '', 
-                    event:{change: $root.updateTotal}"></select>
-                  <img class="remove" data-bind="click: $root.removeShip" src="https://openclipart.org/image/2400px/svg_to_png/16155/milker-X-icon.png" />
-                </div>
+                Pilot:
+                <select data-bind="options: $root.getPilots($data.selectedShip),
+                  optionsText: function(item){return ko.unwrap(item.pilotName) + '['+ ko.unwrap(item.skill) + ']('+ko.unwrap(item.value)+')'},
+                  value: $data.selectedPilot, 
+                  disable: $data.selectedShip() == undefined, 
+                  event:{change: $root.updateTotal}"></select>
+                <img class="remove" data-bind="click: $root.removeShip" src="https://openclipart.org/image/2400px/svg_to_png/16155/milker-X-icon.png" />
               </div>
-              <button data-bind="click: addNewShip">Add New Ship</button>
-              <div>
-                Total: <span data-bind="text: totalPoints"></span>
-              </div>
+            </div>
+            <button data-bind="click: addNewShip">Add New Ship</button>
+            <div>
+              Total: <span data-bind="text: totalCost, css: { overLimit: costLimit() < totalCost() }"></span>
+            </div>
 	</body>
 </html>
